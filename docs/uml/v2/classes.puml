@@ -1,5 +1,4 @@
 @startuml classes
-!pragma layout smetana
 skinparam classAttributeIconSize 0
 hide empty members
 

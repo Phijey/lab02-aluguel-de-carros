@@ -1,5 +1,4 @@
 @startuml estados-pedido
-!pragma layout smetana
 title Ciclo de vida do Pedido de Aluguel (v2)
 
 [*] --> PENDENTE : cliente cria pedido

@@ -7,6 +7,8 @@ Os modelos ficam em pastas por versão para dar para comparar o que foi pensado 
 | v1 | [`v1/`](v1/) | `v0.1.0` | Modelagem inicial, antes do código |
 | v2 | [`v2/`](v2/) | `v1.0.0` | Revisão após a implementação (modelo alinhado com o código) |
 
+Cada pasta tem os fontes `.puml` e as imagens `.png` geradas a partir deles. Na tag `v1.0.2` os PNGs foram adicionados e o diagrama de pacotes das duas versões teve um ajuste de notação (nomes dos pacotes exibidos corretamente), sem mudança de conteúdo.
+
 ## v1 → v2
 
 ### Diagrama de classes

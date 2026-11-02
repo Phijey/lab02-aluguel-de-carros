@@ -29,7 +29,7 @@
 ![Vite](https://img.shields.io/badge/Vite-8-646CFF?logo=vite&logoColor=white)
 ![Supabase](https://img.shields.io/badge/Supabase-PostgreSQL-3FCF8E?logo=supabase&logoColor=white)
 
-✅ Concluído - versão `v1.0.1`
+✅ Concluído - versão `v1.0.2`
 
 ---
 
@@ -137,16 +137,16 @@ React (View) ──HTTP/JSON + JWT──► Controller ──► Service ──�
 ```
 
 ### Diagrama de Pacotes (v2)
-![Diagrama de pacotes](https://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/Phijey/lab02-aluguel-de-carros/main/docs/uml/v2/pacotes.puml)
+![Diagrama de pacotes](docs/uml/v2/pacotes.png)
 
 ### Diagrama de Classes (v2)
-![Diagrama de classes](https://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/Phijey/lab02-aluguel-de-carros/main/docs/uml/v2/classes.puml)
+![Diagrama de classes](docs/uml/v2/classes.png)
 
 ### Diagrama de Casos de Uso (v2)
-![Diagrama de casos de uso](https://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/Phijey/lab02-aluguel-de-carros/main/docs/uml/v2/casos-de-uso.puml)
+![Diagrama de casos de uso](docs/uml/v2/casos-de-uso.png)
 
 ### Estados do Pedido (v2)
-![Estados do pedido](https://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/Phijey/lab02-aluguel-de-carros/main/docs/uml/v2/estados-pedido.puml)
+![Estados do pedido](docs/uml/v2/estados-pedido.png)
 
 ---
 
@@ -159,7 +159,16 @@ Os diagramas foram feitos em **PlantUML** e ficam versionados em `docs/uml`:
 | [v1](docs/uml/v1) | Modelagem inicial: casos de uso, classes e pacotes | `v0.1.0` |
 | [v2](docs/uml/v2) | Revisão após a implementação, alinhada ao código + diagrama de estados | `v1.0.0` |
 
-As diferenças entre as versões estão em [docs/uml/CHANGELOG.md](docs/uml/CHANGELOG.md).
+As diferenças entre as versões estão em [docs/uml/CHANGELOG.md](docs/uml/CHANGELOG.md). Cada diagrama tem o fonte `.puml` e a imagem `.png` gerada.
+
+**Comparação v1 → v2**
+
+| Diagrama | v1 (inicial) | v2 (revisado) |
+|---|---|---|
+| Classes | [classes.png](docs/uml/v1/classes.png) | [classes.png](docs/uml/v2/classes.png) |
+| Pacotes | [pacotes.png](docs/uml/v1/pacotes.png) | [pacotes.png](docs/uml/v2/pacotes.png) |
+| Casos de uso | [casos-de-uso.png](docs/uml/v1/casos-de-uso.png) | [casos-de-uso.png](docs/uml/v2/casos-de-uso.png) |
+| Estados do pedido | - | [estados-pedido.png](docs/uml/v2/estados-pedido.png) |
 
 **Versões do sistema (tags do Git):**
 
@@ -172,6 +181,7 @@ As diferenças entre as versões estão em [docs/uml/CHANGELOG.md](docs/uml/CHAN
 | `v0.5.0` | Funcionalidades dos agentes (avaliação, contratos, crédito, automóveis) |
 | `v1.0.0` | Revisão dos diagramas (UML v2) e documentação final |
 | `v1.0.1` | Prints de demonstração no README |
+| `v1.0.2` | Imagens PNG dos diagramas UML (v1 e v2) |
 
 ---
 

@@ -1,5 +1,4 @@
 @startuml casos-de-uso
-!pragma layout smetana
 left to right direction
 skinparam packageStyle rectangle
 skinparam actorStyle awesome

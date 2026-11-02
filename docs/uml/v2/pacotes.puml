@@ -1,64 +1,64 @@
 @startuml pacotes
-!pragma layout smetana
 skinparam packageStyle folder
+set separator none
 
 title Sistema de Aluguel de Carros - Diagrama de Pacotes / Visão Lógica (v2)
 
 package "Subsistema de Construção Dinâmica de Páginas\n(frontend - React + Vite)" as FE {
-  package "pages" as fe_pages {
+  package "pages" {
   }
-  package "components" as fe_components {
+  package "components" {
   }
-  package "context" as fe_context {
+  package "context" {
   }
-  package "services" as fe_services {
+  package "services" {
   }
-  package "utils" as fe_utils {
+  package "utils" {
   }
 }
 
 package "Subsistema de Gestão de Pedidos e Contratos\n(backend - br.pucminas.aluguelcarros)" as BE {
-  package "controller" as be_controller {
+  package "controller" {
   }
-  package "dto" as be_dto {
+  package "dto" {
   }
-  package "service" as be_service {
+  package "service" {
   }
-  package "repository" as be_repository {
+  package "repository" {
   }
-  package "model" as be_model {
+  package "model" {
   }
-  package "security" as be_security {
+  package "security" {
   }
-  package "config" as be_config {
+  package "config" {
   }
-  package "exception" as be_exception {
+  package "exception" {
   }
-  package "db.migration (Flyway)" as be_migration {
+  package "db.migration (Flyway)" {
   }
 }
 
 database "Supabase\n(PostgreSQL)" as DB
 
-fe_pages ..> fe_components
-fe_pages ..> fe_context
-fe_pages ..> fe_services
-fe_pages ..> fe_utils
-fe_context ..> fe_services
-fe_services ..> be_controller : HTTP/JSON + JWT
+pages ..> components
+pages ..> context
+pages ..> services
+pages ..> utils
+context ..> services
+services ..> controller : HTTP/JSON + JWT
 
-be_controller ..> be_dto
-be_controller ..> be_service
-be_controller ..> be_security
-be_dto ..> be_model
-be_service ..> be_repository
-be_service ..> be_model
-be_service ..> be_exception
-be_service ..> be_security
-be_model ..> be_exception
-be_repository ..> be_model
-be_config ..> be_security
-be_config ..> be_service
-be_repository ..> DB : Spring Data JPA
-be_migration ..> DB : versiona o schema
+controller ..> dto
+controller ..> service
+controller ..> security
+dto ..> model
+service ..> repository
+service ..> model
+service ..> exception
+service ..> security
+model ..> exception
+repository ..> model
+config ..> security
+config ..> service
+repository ..> DB : Spring Data JPA
+"db.migration (Flyway)" ..> DB : versiona o schema
 @enduml
