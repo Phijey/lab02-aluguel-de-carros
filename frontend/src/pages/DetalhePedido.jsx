@@ -48,6 +48,11 @@ export default function DetalhePedido() {
           <dt>Valor estimado</dt><dd>{moeda(pedido.valorEstimado)}</dd>
           <dt>Criado em</dt><dd>{new Date(pedido.criadoEm).toLocaleString('pt-BR')}</dd>
         </dl>
+        <dl>
+          <dt>Avaliado por</dt><dd>{pedido.agenteAvaliador || 'Aguardando avaliação'}</dd>
+          <dt>Parecer</dt><dd>{pedido.parecer || '-'}</dd>
+          {pedido.status === 'CONTRATADO' && <dd><Link to="/contratos">Ver contrato</Link></dd>}
+        </dl>
       </div>
     </section>
   )

@@ -10,8 +10,16 @@ import DetalheCliente from './pages/DetalheCliente'
 import MeusPedidos from './pages/MeusPedidos'
 import PedidoForm from './pages/PedidoForm'
 import DetalhePedido from './pages/DetalhePedido'
+import PedidosAgente from './pages/PedidosAgente'
+import AnalisePedido from './pages/AnalisePedido'
+import Contratos from './pages/Contratos'
+import DetalheContrato from './pages/DetalheContrato'
+import Automoveis from './pages/Automoveis'
 
 const AGENTES = ['EMPRESA', 'BANCO']
+const CLIENTE = ['CLIENTE']
+
+const so = (perfis, elemento) => <RotaProtegida perfis={perfis}>{elemento}</RotaProtegida>
 
 export default function App() {
   return (
@@ -21,13 +29,21 @@ export default function App() {
 
       <Route element={<RotaProtegida><Layout /></RotaProtegida>}>
         <Route path="/" element={<Inicio />} />
-        <Route path="/pedidos" element={<RotaProtegida perfis={['CLIENTE']}><MeusPedidos /></RotaProtegida>} />
-        <Route path="/pedidos/novo" element={<RotaProtegida perfis={['CLIENTE']}><PedidoForm /></RotaProtegida>} />
-        <Route path="/pedidos/:id/editar" element={<RotaProtegida perfis={['CLIENTE']}><PedidoForm /></RotaProtegida>} />
-        <Route path="/pedidos/:id" element={<DetalhePedido />} />
-        <Route path="/perfil" element={<RotaProtegida perfis={['CLIENTE']}><PerfilCliente /></RotaProtegida>} />
-        <Route path="/clientes" element={<RotaProtegida perfis={AGENTES}><ListaClientes /></RotaProtegida>} />
-        <Route path="/clientes/:id" element={<RotaProtegida perfis={AGENTES}><DetalheCliente /></RotaProtegida>} />
+
+        <Route path="/pedidos" element={so(CLIENTE, <MeusPedidos />)} />
+        <Route path="/pedidos/novo" element={so(CLIENTE, <PedidoForm />)} />
+        <Route path="/pedidos/:id/editar" element={so(CLIENTE, <PedidoForm />)} />
+        <Route path="/pedidos/:id" element={so(CLIENTE, <DetalhePedido />)} />
+        <Route path="/perfil" element={so(CLIENTE, <PerfilCliente />)} />
+
+        <Route path="/analise" element={so(AGENTES, <PedidosAgente />)} />
+        <Route path="/analise/:id" element={so(AGENTES, <AnalisePedido />)} />
+        <Route path="/clientes" element={so(AGENTES, <ListaClientes />)} />
+        <Route path="/clientes/:id" element={so(AGENTES, <DetalheCliente />)} />
+        <Route path="/automoveis" element={so(AGENTES, <Automoveis />)} />
+
+        <Route path="/contratos" element={<Contratos />} />
+        <Route path="/contratos/:id" element={<DetalheContrato />} />
       </Route>
 
       <Route path="*" element={<Navigate to="/" replace />} />
