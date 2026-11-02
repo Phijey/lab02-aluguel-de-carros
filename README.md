@@ -29,7 +29,7 @@
 ![Vite](https://img.shields.io/badge/Vite-8-646CFF?logo=vite&logoColor=white)
 ![Supabase](https://img.shields.io/badge/Supabase-PostgreSQL-3FCF8E?logo=supabase&logoColor=white)
 
-✅ Concluído - versão `v1.0.0`
+✅ Concluído - versão `v1.0.1`
 
 ---
 
@@ -42,6 +42,7 @@
 - [Modelagem e Versões](#-modelagem-e-versões)
 - [Instalação e Execução](#-instalação-e-execução)
 - [Estrutura de Pastas](#-estrutura-de-pastas)
+- [Demonstração](#-demonstração)
 - [Endpoints da API](#-endpoints-da-api)
 - [Testes](#-testes)
 - [Documentações utilizadas](#-documentações-utilizadas)
@@ -170,6 +171,7 @@ As diferenças entre as versões estão em [docs/uml/CHANGELOG.md](docs/uml/CHAN
 | `v0.4.0` | Protótipo: criar e acompanhar pedidos de aluguel |
 | `v0.5.0` | Funcionalidades dos agentes (avaliação, contratos, crédito, automóveis) |
 | `v1.0.0` | Revisão dos diagramas (UML v2) e documentação final |
+| `v1.0.1` | Prints de demonstração no README |
 
 ---
 
@@ -259,11 +261,59 @@ Acesse `http://localhost:5173`.
 │       └── utils/
 └── docs/
     ├── historias-de-usuario.md
+    ├── prints/                # telas do sistema
     └── uml/
         ├── v1/                # modelagem inicial
         ├── v2/                # modelagem revisada
         └── CHANGELOG.md
 ```
+
+---
+
+## 🎥 Demonstração
+
+### 🔐 Acesso
+
+| Login | Cadastro de cliente |
+|---|---|
+| ![Login](docs/prints/01-login.png) | ![Cadastro](docs/prints/02-cadastro-cliente.png) |
+
+### 👤 Cliente
+
+**Início com o resumo dos pedidos**
+![Início do cliente](docs/prints/03-inicio-cliente.png)
+
+**Meus pedidos: acompanhamento do status**
+![Meus pedidos](docs/prints/04-meus-pedidos.png)
+
+**Novo pedido: cálculo do valor pelas diárias**
+![Novo pedido](docs/prints/05-novo-pedido.png)
+
+**Detalhe do pedido contratado, com o parecer do agente**
+![Detalhe do pedido](docs/prints/06-detalhe-pedido-cliente.png)
+
+**Meus dados: CRUD do cliente com até 3 rendimentos**
+![Perfil do cliente](docs/prints/07-perfil-cliente.png)
+
+### 🏢 Agente (empresa / banco)
+
+**Início do agente**
+![Início do agente](docs/prints/08-inicio-agente.png)
+
+**Pedidos de todos os clientes, com filtro por status**
+![Pedidos do agente](docs/prints/09-pedidos-agente.png)
+
+**Análise financeira: dados e renda do cliente, parecer, aprovar ou reprovar**
+![Análise do pedido](docs/prints/10-analise-pedido.png)
+
+**Manutenção de automóveis**
+![Automóveis](docs/prints/11-automoveis.png)
+
+**Consulta de clientes**
+![Clientes](docs/prints/12-clientes.png)
+
+**Contrato com crédito concedido pelo banco (automóvel registrado em nome do banco)**
+![Contrato com crédito](docs/prints/13-contrato-credito.png)
 
 ---
 
