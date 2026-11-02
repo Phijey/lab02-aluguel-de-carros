@@ -6,24 +6,30 @@ import br.pucminas.aluguelcarros.exception.RegraNegocioException;
 import br.pucminas.aluguelcarros.exception.RecursoNaoEncontradoException;
 import br.pucminas.aluguelcarros.model.Cliente;
 import br.pucminas.aluguelcarros.model.Rendimento;
+import br.pucminas.aluguelcarros.model.StatusPedido;
 import br.pucminas.aluguelcarros.repository.ClienteRepository;
+import br.pucminas.aluguelcarros.repository.PedidoRepository;
 import br.pucminas.aluguelcarros.repository.UsuarioRepository;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Set;
 
 @Service
 public class ClienteService {
 
     private final ClienteRepository clienteRepository;
     private final UsuarioRepository usuarioRepository;
+    private final PedidoRepository pedidoRepository;
     private final PasswordEncoder passwordEncoder;
 
-    public ClienteService(ClienteRepository clienteRepository, UsuarioRepository usuarioRepository, PasswordEncoder passwordEncoder) {
+    public ClienteService(ClienteRepository clienteRepository, UsuarioRepository usuarioRepository,
+                          PedidoRepository pedidoRepository, PasswordEncoder passwordEncoder) {
         this.clienteRepository = clienteRepository;
         this.usuarioRepository = usuarioRepository;
+        this.pedidoRepository = pedidoRepository;
         this.passwordEncoder = passwordEncoder;
     }
 
@@ -75,6 +81,8 @@ public class ClienteService {
     @Transactional
     public void excluir(String login) {
         Cliente c = buscarPorLogin(login);
+        if (pedidoRepository.existsByClienteLoginAndStatusIn(login, Set.of(StatusPedido.APROVADO, StatusPedido.CONTRATADO)))
+            throw new RegraNegocioException("Não é possível excluir a conta com pedidos aprovados ou contratados");
         clienteRepository.delete(c);
     }
 
