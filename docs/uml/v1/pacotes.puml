@@ -1,0 +1,39 @@
+@startuml pacotes
+!pragma layout smetana
+skinparam packageStyle folder
+
+title Sistema de Aluguel de Carros - Diagrama de Pacotes / Visão Lógica (v1)
+
+package "Construção Dinâmica de Páginas (Front-end React + Vite)" as FE {
+  package "pages" as fe_pages
+  package "components" as fe_components
+  package "services" as fe_services
+  package "context" as fe_context
+}
+
+package "Gestão de Pedidos e Contratos (Back-end Spring Boot)" as BE {
+  package "controller" as be_controller
+  package "dto" as be_dto
+  package "service" as be_service
+  package "repository" as be_repository
+  package "model" as be_model
+  package "security" as be_security
+  package "config" as be_config
+}
+
+database "Supabase (PostgreSQL)" as DB
+
+fe_pages ..> fe_components
+fe_pages ..> fe_services
+fe_pages ..> fe_context
+fe_services ..> be_controller : HTTP/JSON (REST)
+
+be_controller ..> be_dto
+be_controller ..> be_service
+be_service ..> be_repository
+be_service ..> be_model
+be_repository ..> be_model
+be_security ..> be_service
+be_config ..> be_security
+be_repository ..> DB : JPA / JDBC
+@enduml
