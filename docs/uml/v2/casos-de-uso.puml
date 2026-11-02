@@ -1,0 +1,62 @@
+@startuml casos-de-uso
+!pragma layout smetana
+left to right direction
+skinparam packageStyle rectangle
+skinparam actorStyle awesome
+
+title Sistema de Aluguel de Carros - Casos de Uso (v2)
+
+actor "Usuário" as Usuario
+actor "Cliente" as Cliente
+actor "Agente" as Agente
+actor "Empresa" as Empresa
+actor "Banco" as Banco
+
+Cliente -|> Usuario
+Agente -|> Usuario
+Empresa -|> Agente
+Banco -|> Agente
+
+rectangle "Sistema de Aluguel de Carros" {
+  usecase "UC01 Realizar login" as UC01
+  usecase "UC02 Cadastrar-se" as UC02
+  usecase "UC03 Manter dados do cliente\n(consultar, alterar, excluir)" as UC03
+  usecase "UC04 Introduzir pedido de aluguel" as UC04
+  usecase "UC05 Modificar pedido" as UC05
+  usecase "UC06 Consultar pedidos e status" as UC06
+  usecase "UC07 Cancelar pedido" as UC07
+  usecase "UC08 Iniciar análise do pedido" as UC08
+  usecase "UC09 Avaliar pedido\n(parecer financeiro)" as UC09
+  usecase "UC10 Executar contrato" as UC10
+  usecase "UC11 Associar contrato de crédito" as UC11
+  usecase "UC12 Manter automóveis" as UC12
+  usecase "UC13 Consultar clientes" as UC13
+  usecase "UC14 Consultar contratos" as UC14
+  usecase "Verificar disponibilidade\ndo automóvel" as UCD
+}
+
+Usuario --> UC01
+Usuario --> UC02
+Usuario --> UC14
+
+Cliente --> UC03
+Cliente --> UC04
+Cliente --> UC05
+Cliente --> UC06
+Cliente --> UC07
+
+Agente --> UC05
+Agente --> UC06
+Agente --> UC08
+Agente --> UC09
+Agente --> UC10
+Agente --> UC12
+Agente --> UC13
+
+Banco --> UC11
+
+UC04 ..> UCD : <<include>>
+UC09 ..> UCD : <<include>>
+UC11 ..> UC10 : <<extend>>
+UC08 ..> UC09 : <<extend>>
+@enduml

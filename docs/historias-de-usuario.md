@@ -67,3 +67,12 @@ Como agente, quero cadastrar, alterar e remover automóveis, para que fiquem dis
 
 **HU14 - Consultar clientes**
 Como agente, quero consultar os clientes cadastrados, para analisar os dados deles.
+
+**HU15 - Consultar contratos** *(adicionada na revisão v2)*
+Como cliente ou agente, quero consultar os contratos gerados, para ver as condições do aluguel e do crédito.
+- O cliente vê só os próprios contratos
+- Mostra o banco, o valor financiado, a taxa e o valor da parcela quando houver crédito
+
+**HU16 - Disponibilidade do automóvel** *(adicionada na revisão v2)*
+Como cliente, quero ser avisado se o carro já está reservado no período, para escolher outra data ou outro carro.
+- Um automóvel não pode ter dois pedidos aprovados/contratados com períodos sobrepostos

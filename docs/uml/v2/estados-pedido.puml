@@ -1,0 +1,17 @@
+@startuml estados-pedido
+!pragma layout smetana
+title Ciclo de vida do Pedido de Aluguel (v2)
+
+[*] --> PENDENTE : cliente cria pedido
+PENDENTE --> PENDENTE : cliente / agente modifica
+PENDENTE --> EM_ANALISE : agente inicia análise
+PENDENTE --> CANCELADO : cliente cancela
+EM_ANALISE --> EM_ANALISE : agente modifica
+EM_ANALISE --> CANCELADO : cliente cancela
+EM_ANALISE --> APROVADO : parecer positivo
+EM_ANALISE --> REPROVADO : parecer negativo
+APROVADO --> CONTRATADO : agente executa contrato\n(opcional: crédito do banco)
+REPROVADO --> [*]
+CANCELADO --> [*]
+CONTRATADO --> [*]
+@enduml
