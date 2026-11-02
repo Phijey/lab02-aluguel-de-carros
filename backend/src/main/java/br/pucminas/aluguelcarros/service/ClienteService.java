@@ -3,6 +3,7 @@ package br.pucminas.aluguelcarros.service;
 import br.pucminas.aluguelcarros.dto.ClienteRequest;
 import br.pucminas.aluguelcarros.dto.RendimentoDTO;
 import br.pucminas.aluguelcarros.exception.RegraNegocioException;
+import br.pucminas.aluguelcarros.exception.RecursoNaoEncontradoException;
 import br.pucminas.aluguelcarros.model.Cliente;
 import br.pucminas.aluguelcarros.model.Rendimento;
 import br.pucminas.aluguelcarros.repository.ClienteRepository;
@@ -41,6 +42,40 @@ public class ClienteService {
         c.setSenha(passwordEncoder.encode(req.senha()));
         preencher(c, req, cpf);
         return clienteRepository.save(c);
+    }
+
+    public List<Cliente> listar() {
+        return clienteRepository.findAllByOrderByNomeAsc();
+    }
+
+    public Cliente buscar(Long id) {
+        return clienteRepository.findById(id)
+                .orElseThrow(() -> new RecursoNaoEncontradoException("Cliente não encontrado"));
+    }
+
+    public Cliente buscarPorLogin(String login) {
+        return clienteRepository.findByLogin(login)
+                .orElseThrow(() -> new RecursoNaoEncontradoException("Cliente não encontrado"));
+    }
+
+    @Transactional
+    public Cliente atualizar(String login, ClienteRequest req) {
+        Cliente c = buscarPorLogin(login);
+        String cpf = somenteNumeros(req.cpf());
+        if (clienteRepository.existsByCpfAndIdNot(cpf, c.getId()))
+            throw new RegraNegocioException("Já existe um cliente com esse CPF");
+        if (req.senha() != null && !req.senha().isBlank()) {
+            if (req.senha().length() < 6) throw new RegraNegocioException("A senha deve ter pelo menos 6 caracteres");
+            c.setSenha(passwordEncoder.encode(req.senha()));
+        }
+        preencher(c, req, cpf);
+        return clienteRepository.save(c);
+    }
+
+    @Transactional
+    public void excluir(String login) {
+        Cliente c = buscarPorLogin(login);
+        clienteRepository.delete(c);
     }
 
     private void preencher(Cliente c, ClienteRequest req, String cpf) {
