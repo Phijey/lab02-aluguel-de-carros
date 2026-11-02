@@ -18,7 +18,10 @@ export default function Layout() {
           <NavLink to="/" end>Início</NavLink>
           {isAgente
             ? <NavLink to="/clientes">Clientes</NavLink>
-            : <NavLink to="/perfil">Meus dados</NavLink>}
+            : <>
+                <NavLink to="/pedidos">Meus pedidos</NavLink>
+                <NavLink to="/perfil">Meus dados</NavLink>
+              </>}
         </nav>
         <div className="usuario-topo">
           <span>{usuario.nome} <small>({isAgente ? usuario.perfil.toLowerCase() : 'cliente'})</small></span>
