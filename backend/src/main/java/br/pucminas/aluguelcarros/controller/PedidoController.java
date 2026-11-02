@@ -1,7 +1,11 @@
 package br.pucminas.aluguelcarros.controller;
 
+import br.pucminas.aluguelcarros.dto.AvaliacaoRequest;
+import br.pucminas.aluguelcarros.dto.PedidoAgenteRequest;
 import br.pucminas.aluguelcarros.dto.PedidoRequest;
 import br.pucminas.aluguelcarros.dto.PedidoResponse;
+import br.pucminas.aluguelcarros.model.StatusPedido;
+import br.pucminas.aluguelcarros.security.UsuarioLogado;
 import br.pucminas.aluguelcarros.service.PedidoService;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
@@ -38,10 +42,17 @@ public class PedidoController {
         return pedidoService.meusPedidos(jwt.getSubject()).stream().map(PedidoResponse::from).toList();
     }
 
+    @GetMapping
+    @PreAuthorize("hasRole('AGENTE')")
+    @Transactional(readOnly = true)
+    public List<PedidoResponse> listar(@RequestParam(required = false) StatusPedido status) {
+        return pedidoService.listar(status).stream().map(PedidoResponse::from).toList();
+    }
+
     @GetMapping("/{id}")
     @Transactional(readOnly = true)
     public PedidoResponse buscar(@PathVariable Long id, @AuthenticationPrincipal Jwt jwt) {
-        return PedidoResponse.from(pedidoService.buscarDoCliente(id, jwt.getSubject()));
+        return PedidoResponse.from(pedidoService.buscarParaUsuario(id, jwt.getSubject(), UsuarioLogado.isAgente(jwt)));
     }
 
     @PutMapping("/{id}")
@@ -56,5 +67,26 @@ public class PedidoController {
     @Transactional
     public PedidoResponse cancelar(@PathVariable Long id, @AuthenticationPrincipal Jwt jwt) {
         return PedidoResponse.from(pedidoService.cancelar(id, jwt.getSubject()));
+    }
+
+    @PatchMapping("/{id}/analise")
+    @PreAuthorize("hasRole('AGENTE')")
+    @Transactional
+    public PedidoResponse iniciarAnalise(@PathVariable Long id, @AuthenticationPrincipal Jwt jwt) {
+        return PedidoResponse.from(pedidoService.iniciarAnalise(id, jwt.getSubject()));
+    }
+
+    @PutMapping("/{id}/agente")
+    @PreAuthorize("hasRole('AGENTE')")
+    @Transactional
+    public PedidoResponse alterarPeloAgente(@PathVariable Long id, @RequestBody @Valid PedidoAgenteRequest req) {
+        return PedidoResponse.from(pedidoService.alterarPeloAgente(id, req));
+    }
+
+    @PatchMapping("/{id}/avaliacao")
+    @PreAuthorize("hasRole('AGENTE')")
+    @Transactional
+    public PedidoResponse avaliar(@PathVariable Long id, @AuthenticationPrincipal Jwt jwt, @RequestBody @Valid AvaliacaoRequest req) {
+        return PedidoResponse.from(pedidoService.avaliar(id, jwt.getSubject(), req));
     }
 }

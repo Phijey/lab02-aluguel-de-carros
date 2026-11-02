@@ -9,12 +9,14 @@ import java.time.LocalDateTime;
 
 public record PedidoResponse(Long id, Long clienteId, String clienteNome, AutomovelResponse automovel,
                              LocalDate dataInicio, LocalDate dataFim, long dias, BigDecimal valorEstimado,
-                             StatusPedido status, LocalDateTime criadoEm, LocalDateTime atualizadoEm) {
+                             StatusPedido status, String agenteAvaliador, String parecer,
+                             LocalDateTime criadoEm, LocalDateTime atualizadoEm) {
 
     public static PedidoResponse from(PedidoAluguel p) {
         return new PedidoResponse(p.getId(), p.getCliente().getId(), p.getCliente().getNome(),
                 AutomovelResponse.from(p.getAutomovel()), p.getDataInicio(), p.getDataFim(),
                 PedidoAluguel.dias(p.getDataInicio(), p.getDataFim()), p.getValorEstimado(),
-                p.getStatus(), p.getCriadoEm(), p.getAtualizadoEm());
+                p.getStatus(), p.getAgenteAvaliador() == null ? null : p.getAgenteAvaliador().getNome(),
+                p.getParecer(), p.getCriadoEm(), p.getAtualizadoEm());
     }
 }
